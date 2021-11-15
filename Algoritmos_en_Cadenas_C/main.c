@@ -4,45 +4,13 @@
 #include <string.h>
 #include<conio.h>
 
-void convierteCadena(char cad[]) {
-    int     i = 0;
-    char    letra;
+void contarVocales();
 
-    while(cad[i] != '\0') {
-        if(cad[i] != '\0') {
-            if(cad[i] == ' ') {
-                ++i;
-                /*CONVERTIR A MAYÚSCULA */
-                letra = cad[i];
-                cad[i] = toupper(letra);
-                ++i;
-            } else {
-                if(i == 0) {
-                    /*CONVERTIR A MAYÚSCULA */
-                    letra = cad[i];
-                    cad[i] = toupper(letra);
-                    ++i;
-                } else {
-                    /*CONVERTIR A MINÚSCULA */
-                    letra = cad[i];
-                    cad[i] = tolower(letra);
-                    ++i;
-                }
-            }
-        } else
-            printf("Hemos convertido a nombre propio\n");
-    }
-}
+void pasarANombrePropio();
 
 int main() {
 
     int option = 0;
-
-    char cadena[35];
-
-    char palabra[30];
-
-    char palabra1;
 
     char *menu = "\nHola!, digite una opcion:\n\n"
                  "1. Conversion en nombre propio\n"
@@ -67,53 +35,15 @@ int main() {
 
             case 1 :
 
-                printf("Introduce una cadena:\n");
-
-                int i = 0;
-
-                char cadena1;
-
-                int cont = 0;
-
-                scanf("%s", &cadena);
-
-                cadena1 += cadena1 + ' ';
-
-                if (strlen((const char *) &cadena) > 2){
-
-                    cont++;
-
-                    cadena[i] = toupper(cadena[i]);
-
-                }
-
-                printf("%d",cont);
-                while (cadena[i] != '\0'){
-
-                    printf("%c",cadena[i]);
-
-                    i++;
-                }
-
+                pasarANombrePropio();
 
             case 2 :;
                 break;
 
             case 3 :
 
+                contarVocales();
 
-                printf("Ingrese una palabra en minusculas:\n");
-                scanf("%s", &palabra);
-                int cant = 0;
-                int x = 0;
-                while (palabra[x] != '\0') {
-                    if (palabra[x] == 'a' || palabra[x] == 'e' || palabra[x] == 'i' || palabra[x] == 'o' ||
-                        palabra[x] == 'u') {
-                        cant++;
-                    }
-                    x++;
-                }
-                printf("La cantidad de vocales que tiene la palabra %s es %i\n", palabra, cant);
                 break;
 
             case 4 :;
@@ -142,4 +72,65 @@ int main() {
     }
 
     return 0;
+}
+
+void pasarANombrePropio() {
+
+    char cadena[35];
+
+    char palabra1;
+
+    printf("Introduce una cadena:\n");
+
+    int i = 0;
+
+    char cadena1;
+
+    int cont = 0;
+
+    scanf("%s", &cadena);
+
+    cadena1 += cadena1 + ' ';
+
+    if (strlen((const char *) &cadena) > 2) {
+
+        cont++;
+
+        cadena[i] = toupper(cadena[i]);
+
+    }
+
+    printf("%d", cont);
+    while (cadena[i] != '\0') {
+
+        printf("%c", cadena[i]);
+
+        i++;
+    }
+
+}
+
+void contarVocales() {
+
+    char palabra[30];
+
+    printf("Ingrese una palabra:\n");
+
+    fflush(stdin);
+
+    gets(palabra);
+
+    int cant = 0;
+    int x = 0;
+
+    while (palabra[x] != '\0') {
+
+        if (palabra[x] == 'a' || palabra[x] == 'e' || palabra[x] == 'i' || palabra[x] == 'o' ||
+            palabra[x] == 'u') {
+            cant++;
+        }
+        x++;
+    }
+    printf("La cantidad de vocales que tiene la palabra '%s' es %i\n", palabra, cant);
+
 }
