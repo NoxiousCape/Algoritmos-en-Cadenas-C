@@ -1,0 +1,3 @@
+C:/Users/XS/Desktop/Estudios/Universidad/Semestre 4/Programacion III/Programas/C/Algoritmos-en-Cadenas-C/Algoritmos_en_Cadenas_C/cmake-build-debug/CMakeFiles/Algoritmos_en_Cadenas_C.dir
+C:/Users/XS/Desktop/Estudios/Universidad/Semestre 4/Programacion III/Programas/C/Algoritmos-en-Cadenas-C/Algoritmos_en_Cadenas_C/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/XS/Desktop/Estudios/Universidad/Semestre 4/Programacion III/Programas/C/Algoritmos-en-Cadenas-C/Algoritmos_en_Cadenas_C/cmake-build-debug/CMakeFiles/rebuild_cache.dir
