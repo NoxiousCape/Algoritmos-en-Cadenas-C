@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-#include<conio.h>
 
 void contarVocales();
 
 void pasarANombrePropio();
+
+void buscarCadena();
 
 int main() {
 
@@ -37,7 +38,12 @@ int main() {
 
                 pasarANombrePropio();
 
+                break;
+
             case 2 :;
+
+                buscarCadena();
+
                 break;
 
             case 3 :
@@ -78,35 +84,26 @@ void pasarANombrePropio() {
 
     char cadena[35];
 
-    char palabra1;
-
     printf("Introduce una cadena:\n");
 
-    int i = 0;
+    fflush(stdin);
 
-    char cadena1;
+    gets(cadena);
 
-    int cont = 0;
+    for (char *palabra = strtok(cadena, " "); palabra; palabra = strtok(NULL, " ")) {
 
-    scanf("%s", &cadena);
+        if (strlen(palabra) > 1) {
 
-    cadena1 += cadena1 + ' ';
+            palabra[0] = toupper(palabra[0]);
 
-    if (strlen((const char *) &cadena) > 2) {
+        }
 
-        cont++;
-
-        cadena[i] = toupper(cadena[i]);
+        printf("%s ", palabra);
 
     }
+}
 
-    printf("%d", cont);
-    while (cadena[i] != '\0') {
-
-        printf("%c", cadena[i]);
-
-        i++;
-    }
+void buscarCadena() {
 
 }
 
@@ -121,16 +118,18 @@ void contarVocales() {
     gets(palabra);
 
     int cant = 0;
-    int x = 0;
+    int i = 0;
 
-    while (palabra[x] != '\0') {
+    while (palabra[i] != '\0') {
 
-        if (palabra[x] == 'a' || palabra[x] == 'e' || palabra[x] == 'i' || palabra[x] == 'o' ||
-            palabra[x] == 'u') {
+        if (tolower(palabra[i]) == 'a' || tolower(palabra[i]) == 'e' || tolower(palabra[i]) == 'i' ||
+            tolower(palabra[i]) == 'o' ||
+            tolower(palabra[i]) == 'u') {
+
             cant++;
         }
-        x++;
+        i++;
     }
-    printf("La cantidad de vocales que tiene la palabra '%s' es %i\n", palabra, cant);
 
+    printf("La cantidad de vocales que tiene la palabra '%s' es %i\n", palabra, cant);
 }
