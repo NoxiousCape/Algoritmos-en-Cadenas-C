@@ -105,6 +105,52 @@ void pasarANombrePropio() {
 
 void buscarCadena() {
 
+    char cadena[30];
+
+    char cadenaABuscar[30];
+
+    int i = 0;
+
+    int j = 0;
+
+    int cant = 0;
+
+    printf("Ingrese una cadena\n");
+
+    fflush(stdin);
+
+    gets(cadena);
+
+    printf("Ingrese la cadena que desea buscar\n");
+
+    fflush(stdin);
+
+    gets(cadenaABuscar);
+
+    while (cadenaABuscar[i] != '\0'){
+
+        cadenaABuscar[i] = tolower(cadenaABuscar[i]);
+
+        i++;
+    }
+
+    while (cadena[j] != '\0'){
+
+        cadena[j] = tolower(cadena[j]);
+
+        j++;
+    }
+
+    for (char *palabra = strtok(cadena, " "); palabra; palabra = strtok(NULL, " ")) {
+
+        if (strstr(cadena, palabra) != NULL) {
+
+            cant++;
+        }
+    }
+
+    printf("La cantidad de veces que se repite la palabra '%s' es %i\n", cadenaABuscar, cant);
+
 }
 
 void contarVocales() {
