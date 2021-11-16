@@ -9,6 +9,8 @@ void pasarANombrePropio();
 
 void buscarCadena();
 
+void validarCorreo();
+
 int main() {
 
     int option = 0;
@@ -71,7 +73,7 @@ int main() {
                 break;
 
             case 10 :
-            validarCorreo();
+                validarCorreo();
                 break;
         }
 
@@ -80,14 +82,15 @@ int main() {
     return 0;
 }
 
+
+
 void pasarANombrePropio() {
 
     char cadena[35];
 
     printf("Introduce una cadena:\n");
-
+    getchar();
     fflush(stdin);
-
     gets(cadena);
 
     for (char *palabra = strtok(cadena, " "); palabra; palabra = strtok(NULL, " ")) {
@@ -101,6 +104,7 @@ void pasarANombrePropio() {
         printf("%s ", palabra);
 
     }
+    getchar();
 }
 
 void buscarCadena() {
@@ -112,10 +116,10 @@ void contarVocales() {
     char palabra[30];
 
     printf("Ingrese una palabra:\n");
-
+    getchar();
     fflush(stdin);
-
     gets(palabra);
+
 
     int cant = 0;
     int i = 0;
@@ -132,44 +136,49 @@ void contarVocales() {
     }
 
     printf("La cantidad de vocales que tiene la palabra '%s' es %i\n", palabra, cant);
+    getchar();
 }
 
 
-void validarCorreo(){
+void validarCorreo() {
+
     char email[50];
     printf("Ingrese un correo:\n");
+    getchar();
     fflush(stdin);
     gets(email);
-    
-  int tam=strlen(email);
-  int arroba = 0, punto = 0, antesPunto = 0, despuesPunto = 0, i;
 
-  for (i = 0; i < tam; i++) {
-    char c = email[i];
-    if(c == '@') {
-      if (arroba)
-        break; 
-      arroba = 1;
-      if (i < 3)
-        break;
-    }
-    else if (arroba) { 
-      if (punto) { 
-        despuesPunto++;
-      }
-      else if(c == '.') {
-        punto = 1;
-        if (antesPunto < 3) {
-          break; 
+    int tam=strlen(email);
+    int arroba = 0, punto = 0, antesPunto = 0, despuesPunto = 0, i;
+
+    for (i = 0; i < tam; i++) {
+        char c = email[i];
+        if(c == '@') {
+            if (arroba)
+                break;
+            arroba = 1;
+            if (i < 3)
+                break;
         }
-      }
-      else {
-        antesPunto++;
-      }
+        else if (arroba) {
+            if (punto) {
+                despuesPunto++;
+            }
+            else if(c == '.') {
+                punto = 1;
+                if (antesPunto < 3) {
+                    break;
+                }
+            }
+            else {
+                antesPunto++;
+            }
+        }
     }
-  } 
-  if (i == tam && despuesPunto > 1)
-    printf("El correo electrónico ingresado es VALIDO");
-  else
-    printf("ERROR en el formato del correo electrónico ingresado");
+    if (i == tam && despuesPunto > 1)
+        printf("El correo electrónico ingresado es VALIDO");
+    else
+        printf("ERROR en el formato del correo electrónico ingresado");
+
+    getchar();
 }
