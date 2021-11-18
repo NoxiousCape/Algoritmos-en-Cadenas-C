@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <time.h>
 #define TAM 50
 
 void contarVocales();
@@ -9,6 +9,8 @@ void contarVocales();
 void pasarANombrePropio();
 
 void buscarCadena();
+
+void anioNuevo();
 
 int busqueda(const char b[], int llave, int tamanio);
 
@@ -59,7 +61,10 @@ int main() {
 
                 break;
 
-            case 4 :;
+            case 4 :
+
+                anioNuevo();
+
                 break;
 
             case 5 :;
@@ -171,6 +176,26 @@ void contarVocales() {
 
     printf("La cantidad de vocales que tiene la palabra '%s' es %i\n", palabra, cant);
     getchar();
+}
+
+void anioNuevo() {
+
+    time_t tiempo;
+
+    time(&tiempo);
+
+    struct tm *mitiempo = localtime(&tiempo);
+
+    int tiempoTranscurridoMin = (mitiempo->tm_hour * 60) + mitiempo->tm_min;
+
+    int tiempoFaltanteMin = 1440 - tiempoTranscurridoMin;
+
+    int tiempoTranscurridoSec = (mitiempo->tm_hour * 3600) + mitiempo->tm_sec;
+
+    int tiempoFaltanteSec = 86400 - tiempoTranscurridoSec;
+
+    printf("Faltan %d minuto(s) y %d segundo(s) para media noche\n", tiempoFaltanteMin, tiempoFaltanteSec);
+
 }
 
 
