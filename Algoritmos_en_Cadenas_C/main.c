@@ -5,17 +5,15 @@
 #define TAM 50
 
 void contarVocales();
-
 void pasarANombrePropio();
-
 void buscarCadena();
-
 void anioNuevo();
 
+
 int busqueda(const char b[], int llave, int tamanio);
-
+int cantPalabrasRepetidas();
+int toLower(char *cadena);
 int eliminarRepetidos();
-
 void validarCorreo();
 
 int main() {
@@ -44,28 +42,20 @@ int main() {
         switch (option) {
 
             case 1 :
-
                 pasarANombrePropio();
-
                 break;
 
             case 2 :
-
                 buscarCadena();
-
                 break;
 
             case 3 :
-
                 contarVocales();
-
                 break;
 
             case 4 :
-
                 anioNuevo();
-
-                break;
+               break;
 
             case 5 :;
                 break;
@@ -80,7 +70,8 @@ int main() {
                 eliminarRepetidos();
                 break;
 
-            case 9 :;
+            case 9 :
+                cantPalabrasRepetidas();
                 break;
 
             case 10 :
@@ -105,15 +96,11 @@ void pasarANombrePropio() {
     gets(cadena);
 
     for (char *palabra = strtok(cadena, " "); palabra; palabra = strtok(NULL, " ")) {
-
         if (strlen(palabra) > 1) {
-
             palabra[0] = toupper(palabra[0]);
 
         }
-
         printf("%s ", palabra);
-
     }
     getchar();
 }
@@ -181,21 +168,15 @@ void contarVocales() {
 void anioNuevo() {
 
     time_t tiempo;
-
     time(&tiempo);
-
     struct tm *mitiempo = localtime(&tiempo);
-
     int tiempoTranscurridoMin = (mitiempo->tm_hour * 60) + mitiempo->tm_min;
-
     int tiempoFaltanteMin = 1440 - tiempoTranscurridoMin;
-
     int tiempoTranscurridoSec = (mitiempo->tm_hour * 3600) + mitiempo->tm_sec;
-
     int tiempoFaltanteSec = 86400 - tiempoTranscurridoSec;
-
     printf("Faltan %d minuto(s) y %d segundo(s) para media noche\n", tiempoFaltanteMin, tiempoFaltanteSec);
-
+    getchar();
+    getchar();
 }
 
 
@@ -230,6 +211,63 @@ int busqueda(const char b[], int llave, int tamanio) {
     }
     return -1;
 }
+
+int cantPalabrasRepetidas() {
+
+    char cadena[1000];
+    char aux[strlen(cadena)];
+    printf("Introduce una cadena:\n");
+    getchar();
+    fflush(stdin);
+    gets(cadena);
+    strcpy(aux, cadena);
+    int nPalabras = toLower(aux);
+    char tokens[nPalabras][30];
+    char *token = strtok(aux, " ,.!?");
+
+    nPalabras = 0;
+    while(token != NULL) {
+        strcpy(tokens[nPalabras++], token);
+        token = strtok(NULL, " ,.-!?");
+    }
+
+    int contPal[nPalabras];
+    int palRep = 0;
+    int suma = 0;
+
+    for(int i = 0; i <nPalabras; i++) {
+        contPal[i] = 0;
+    }
+
+    for(int i = 0; i < nPalabras - 1; i++) {
+        for(int j = i+1; j < nPalabras ; j++) {
+            if(strcmp(tokens[i], tokens[j]) == 0 && strcmp(tokens[i], "*") != 0){
+                strcpy(tokens[j],"*");
+                contPal[palRep]++;
+            }
+        }
+
+        if(strcmp(tokens[i], "*") != 0) {
+            suma +=  contPal[palRep];
+            palRep++;
+        }
+    }
+    printf("\nEn la cadena de texto ingresada y sin contar la palabra original, hay un TOTAL de %d palabras repetidas.\n\n", suma);
+    getchar();
+}
+
+int toLower(char *cadena) {
+    int n = 0;
+    for(int i = 0; i < strlen(cadena); i++) {
+        cadena[i] = tolower(cadena[i]);
+        if(cadena[i] == ' ') {
+            n++;
+        }
+    }
+
+    return n+1;
+}
+
 
 void validarCorreo() {
 
