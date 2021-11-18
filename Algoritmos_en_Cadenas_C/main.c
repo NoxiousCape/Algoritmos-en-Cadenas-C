@@ -2,12 +2,15 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <time.h>
 
 void contarVocales();
 
 void pasarANombrePropio();
 
 void buscarCadena();
+
+void anioNuevo();
 
 int main() {
 
@@ -52,7 +55,10 @@ int main() {
 
                 break;
 
-            case 4 :;
+            case 4 :
+
+                anioNuevo();
+
                 break;
 
             case 5 :;
@@ -127,14 +133,14 @@ void buscarCadena() {
 
     gets(cadenaABuscar);
 
-    while (cadenaABuscar[i] != '\0'){
+    while (cadenaABuscar[i] != '\0') {
 
         cadenaABuscar[i] = tolower(cadenaABuscar[i]);
 
         i++;
     }
 
-    while (cadena[j] != '\0'){
+    while (cadena[j] != '\0') {
 
         cadena[j] = tolower(cadena[j]);
 
@@ -178,4 +184,24 @@ void contarVocales() {
     }
 
     printf("La cantidad de vocales que tiene la palabra '%s' es %i\n", palabra, cant);
+}
+
+void anioNuevo() {
+
+    time_t tiempo;
+
+    time(&tiempo);
+
+    struct tm *mitiempo = localtime(&tiempo);
+
+    int tiempoTranscurridoMin = (mitiempo->tm_hour * 60) + mitiempo->tm_min;
+
+    int tiempoFaltanteMin = 1440 - tiempoTranscurridoMin;
+
+    int tiempoTranscurridoSec = (mitiempo->tm_hour * 3600) + mitiempo->tm_sec;
+
+    int tiempoFaltanteSec = 86400 - tiempoTranscurridoSec;
+
+    printf("Faltan %d minuto(s) y %d segundo(s) para media noche\n", tiempoFaltanteMin, tiempoFaltanteSec);
+
 }
