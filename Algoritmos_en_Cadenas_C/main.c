@@ -2,12 +2,17 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#define TAM 50
 
 void contarVocales();
 
 void pasarANombrePropio();
 
 void buscarCadena();
+
+int busqueda(const char b[], int llave, int tamanio);
+
+int eliminarRepetidos();
 
 void validarCorreo();
 
@@ -42,7 +47,7 @@ int main() {
 
                 break;
 
-            case 2 :;
+            case 2 :
 
                 buscarCadena();
 
@@ -66,7 +71,8 @@ int main() {
             case 7 :;
                 break;
 
-            case 8 :;
+            case 8 :
+                eliminarRepetidos();
                 break;
 
             case 9 :;
@@ -110,51 +116,34 @@ void pasarANombrePropio() {
 void buscarCadena() {
 
     char cadena[30];
-
     char cadenaABuscar[30];
-
     int i = 0;
-
     int j = 0;
-
     int cant = 0;
-
     printf("Ingrese una cadena\n");
-
+    getchar();
     fflush(stdin);
-
     gets(cadena);
-
     printf("Ingrese la cadena que desea buscar\n");
-
     fflush(stdin);
-
     gets(cadenaABuscar);
-
     while (cadenaABuscar[i] != '\0'){
-
         cadenaABuscar[i] = tolower(cadenaABuscar[i]);
-
         i++;
     }
 
     while (cadena[j] != '\0'){
-
         cadena[j] = tolower(cadena[j]);
-
         j++;
     }
 
     for (char *palabra = strtok(cadena, " "); palabra; palabra = strtok(NULL, " ")) {
-
         if (strstr(cadena, palabra) != NULL) {
-
             cant++;
         }
     }
-
     printf("La cantidad de veces que se repite la palabra '%s' es %i\n", cadenaABuscar, cant);
-
+    getchar();
 }
 
 void contarVocales() {
@@ -165,7 +154,6 @@ void contarVocales() {
     getchar();
     fflush(stdin);
     gets(palabra);
-
 
     int cant = 0;
     int i = 0;
@@ -185,6 +173,38 @@ void contarVocales() {
     getchar();
 }
 
+
+int eliminarRepetidos() {
+
+    int x = 0;
+    char frase[TAM];
+    char frase_2[TAM] = {""};
+
+    printf("Introduze una frase: ");
+    getchar();
+    fgets(frase, 50, stdin);
+
+    for (int i = 0; i < 50 && frase[i] != '\n'; i++) {
+        if (busqueda(frase_2, frase[i], 50) == -1) {
+            frase_2[x] = frase[i];
+            x++;
+        }
+    }
+    printf("La frase SIN CARACTERES REPETIDOS es: %s\n", frase_2);
+    getchar();
+    return 0;
+}
+
+int busqueda(const char b[], int llave, int tamanio) {
+    if (isalpha(llave))  {
+        for (int i = 0; i < tamanio; ++i) {
+            if (b[i] == llave) {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
 
 void validarCorreo() {
 
