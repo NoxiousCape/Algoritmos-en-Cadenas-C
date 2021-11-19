@@ -8,6 +8,9 @@ void contarVocales();
 void pasarANombrePropio();
 void buscarCadena();
 void anioNuevo();
+void removerCaracteres();
+char llenar_caracteres();
+int interseccion();
 
 
 int busqueda(const char b[], int llave, int tamanio);
@@ -57,13 +60,16 @@ int main() {
                 anioNuevo();
                break;
 
-            case 5 :;
+            case 5 :
+                llenar_caracteres();
                 break;
 
-            case 6 :;
+            case 6 :
+                removerCaracteres();
                 break;
 
-            case 7 :;
+            case 7 :
+                interseccion();
                 break;
 
             case 8 :
@@ -310,4 +316,109 @@ void validarCorreo() {
         printf("ERROR en el formato del correo electrónico ingresado");
 
     getchar();
+}
+char llenar_caracteres(){
+    char cadena[30];
+    char caracter[30];
+    int cant, opc;
+
+    printf("cadena \n");
+    scanf("%s",&cadena);
+    printf("caracter a implenetar \n");
+    scanf("%s",&caracter);
+    printf("cantidad de veces \n");
+    scanf("%d",&cant);
+    printf("1. Derecha \n");
+    printf("2. Izquierda \n");
+    scanf("%d",&opc);
+
+    if (opc == 1){
+        for (int i = 0; i <= cant; i++) {
+            strcat(cadena,caracter);
+        }
+        printf("cadena: %s", cadena);
+
+
+    }if (opc == 2){
+        for (int i = 0; i <= cant; i++) {
+            strcat(cadena,caracter);
+        }
+
+        printf("cadena: %s", caracter);
+
+
+    }
+
+}
+
+void removerCaracteres() {
+    char cadena[30];
+    char caracteres[30];
+
+    printf("La cadena es: \n" );
+    scanf("%s",&cadena);
+    printf("Y los caracteres que se quitan son: \n");
+    scanf("%s",&caracteres);
+
+    int indiceCadena = 0, indiceCadenaLimpia = 0;
+    int deberiaAgregarCaracter = 1;
+    while (cadena[indiceCadena]) {
+        deberiaAgregarCaracter = 1;
+        int indiceCaracteres = 0;
+        while (caracteres[indiceCaracteres]) {
+            if (cadena[indiceCadena] == caracteres[indiceCaracteres]) {
+                deberiaAgregarCaracter = 0;
+            }
+            indiceCaracteres++;
+        }
+        if (deberiaAgregarCaracter) {
+            cadena[indiceCadenaLimpia] = cadena[indiceCadena];
+            indiceCadenaLimpia++;
+        }
+        indiceCadena++;
+    }
+    cadena[indiceCadenaLimpia] = 0;
+    printf("Despues de remover es: '%s'\n", cadena);
+}
+int interseccion(){
+
+    char str1[100];
+    char str2[100];
+
+
+    printf("Primera cadena :");
+    scanf("%s", &str1);
+
+
+    printf("Segunda cadena :");
+    scanf("%s", &str2);
+
+
+    int i, j, k = 0;
+    char str3[100];
+
+    int len1 = strlen(str1);
+    int len2 = strlen(str2);
+
+    for (i = 0; i < len1; i++) {
+        for (j = 0; j < len2; j++) {
+            if (str1[i] == str2[j] ) {
+                str3[k] = str1[i];
+                k++;
+            }
+        }
+    }
+
+    str3[k] = '\0';
+
+    for ( size_t i = 0, j = 0;  str3[i] != '\0'; )
+    {
+        if ( str3[++i] != str3[j] && str3[i] != '\n' )
+        {
+            if ( i != ++j ) str3[j] = str3[i];
+        }
+    }
+
+    printf("\nResultado es:%s", str3);
+
 }
