@@ -9,12 +9,10 @@
 C:/Users/XS/Desktop/Estudios/Universidad/Semestre 4/Programacion III/Programas/C/Algoritmos-en-Cadenas-C/Algoritmos_en_Cadenas_C/main.c
 stdio.h
 -
-stdlib.h
--
 ctype.h
 -
 string.h
 -
-time.h
+stdlib.h
 -
 
